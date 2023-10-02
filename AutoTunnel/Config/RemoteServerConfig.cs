@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel;
 
-using Newtonsoft.Json;
-
 namespace Force.AutoTunnel.Config
 {
 	public class RemoteServerConfig
@@ -21,7 +19,6 @@ namespace Force.AutoTunnel.Config
 		public int? ClampMss { get; set; }
 
 		[DefaultValue(15)]
-		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
 		public int PingInterval { get; set; }
 	}
 }

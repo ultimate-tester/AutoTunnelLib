@@ -20,9 +20,6 @@ namespace Force.AutoTunnel
 
 			if (config.EnableListening)
 			{
-				if (config.AddFirewallRule)
-					FirewallHelper.AddOpenFirewallRule(config.Port.ToString(CultureInfo.InvariantCulture));
-
 				_listener = new Listener(_storage, config);
 				_listener.Start();
 			}
@@ -38,10 +35,8 @@ namespace Force.AutoTunnel
 		{
 			_clientSenders.ForEach(x => x.Dispose());
 			_storage.RemoveAllSessions();
-			if (_listener != null)
+            if (_listener != null)
 				_listener.Dispose();
-			if (ConfigHelper.Config.AddFirewallRule)
-				FirewallHelper.DeleteFirewallRule(ConfigHelper.Config.Port.ToString(CultureInfo.InvariantCulture));
 		}
 	}
 }

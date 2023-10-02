@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿
 
 namespace Force.AutoTunnel.Config
 {
@@ -6,7 +6,6 @@ namespace Force.AutoTunnel.Config
 	{
 		public string Key { get; set; }
 
-		[JsonIgnore]
 		public byte[] BinaryKey { get; set; }
 
 		public string Description { get; set; }

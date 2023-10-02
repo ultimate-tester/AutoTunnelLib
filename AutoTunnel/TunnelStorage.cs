@@ -6,7 +6,6 @@ using System.Net;
 using System.Threading;
 
 using Force.AutoTunnel.Encryption;
-using Force.AutoTunnel.Service;
 
 namespace Force.AutoTunnel
 {
@@ -55,8 +54,6 @@ namespace Force.AutoTunnel
 							if (_clients.TryRemove(x, out value)) value.Dispose();
 						});
 			}
-
-			SetIcon();
 		}
 
 		private readonly ConcurrentDictionary<ulong, TunnelSession> _sessions = new ConcurrentDictionary<ulong, TunnelSession>();
@@ -70,7 +67,6 @@ namespace Force.AutoTunnel
 					Decryptor = new DecryptHelper(sessionKey)
 				};
 			_sessions[hostKey] = s;
-			SetIcon();
 			return s;
 		}
 
@@ -98,25 +94,11 @@ namespace Force.AutoTunnel
 		public void IncrementEstablishing()
 		{
 			Interlocked.Increment(ref _establishingCount);
-			SetIcon();
 		}
 
 		public void DecrementEstablishing()
 		{
 			Interlocked.Decrement(ref _establishingCount);
-			SetIcon();
-		}
-
-		private void SetIcon()
-		{
-			if (_establishingCount > 0)
-			{
-				ConsoleHelper.SetActiveIcon(ConsoleHelper.IconStatus.Establishing);
-			}
-			else
-			{
-				ConsoleHelper.SetActiveIcon(_sessions.Count > 0 ? ConsoleHelper.IconStatus.Active : ConsoleHelper.IconStatus.Default);
-			}
 		}
 	}
 }
