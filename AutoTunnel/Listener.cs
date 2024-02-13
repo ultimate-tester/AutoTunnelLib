@@ -97,9 +97,11 @@ namespace Force.AutoTunnel
 								RemoteClientConfig selectedRemoteClient = null;
 								foreach (var remoteClient in _config.RemoteClients)
 								{
-									if (remoteClient.BinaryKey == null) 
+									if (remoteClient.BinaryKey == null) {
 										remoteClient.BinaryKey = PasswordHelper.GenerateKey(remoteClient.Key);
-									decryptHelper = new DecryptHelper(remoteClient.BinaryKey);
+                                    }
+
+                                    decryptHelper = new DecryptHelper(remoteClient.BinaryKey);
 									dataLen = decryptHelper.Decrypt(inBuf, 4);
 									if (dataLen > 0)
 									{

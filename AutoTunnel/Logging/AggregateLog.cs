@@ -24,5 +24,12 @@ namespace Force.AutoTunnel.Logging
 		{
 			_logs.ForEach(x => x.WriteLine(line));
 		}
-	}
+
+        public override string ToString()
+        {
+			return _logs.ToString();
+        }
+
+
+    }
 }

@@ -1,7 +1,6 @@
 ﻿using Force.AutoTunnel;
 using Force.AutoTunnel.Config;
 using System;
-using System.Reflection;
 
 namespace AutoTunnelLib
 {
@@ -23,7 +22,7 @@ namespace AutoTunnelLib
             Starter.Start();
         }
 
-        public void StartServer(int port = 12017)
+        public void StartServer(RemoteClientConfig[] remoteClients, int port = 12017)
         {
             if (!NativeHelper.IsNativeAvailable)
             {
@@ -32,10 +31,13 @@ namespace AutoTunnelLib
 
             if (!ConfigHelper.SetConfig(
                 EnableListening: true,
-                RemoteClients: new RemoteClientConfig[0],
+                ListenAddress: "0.0.0.0",
+                RemoteClients: remoteClients,
                 Port: port
                 ))
+            {
                 return;
+            }
 
             Starter.Start();
         }

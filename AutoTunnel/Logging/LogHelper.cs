@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Force.AutoTunnelLib.Logging;
+using System;
 
 namespace Force.AutoTunnel.Logging
 {
 	public static class LogHelper
 	{
-		private static ILog _log = new ConsoleLog();
+		private static ILog _log = new MemoryLog();
 
 		public static void SetLog(ILog log)
 		{

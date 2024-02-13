@@ -27,15 +27,18 @@ namespace Force.AutoTunnel.Config
                 AutoReloadOnChange = false,
             };
 
-            foreach (var remoteServerConfig in config.RemoteServers)
+            if (config.RemoteServers != null)
             {
-                if (string.IsNullOrEmpty(remoteServerConfig.ConnectHost) && string.IsNullOrEmpty(remoteServerConfig.TunnelHost))
-                    throw new InvalidOperationException("Missing host info in config");
+                foreach (var remoteServerConfig in config.RemoteServers)
+                {
+                    if (string.IsNullOrEmpty(remoteServerConfig.ConnectHost) && string.IsNullOrEmpty(remoteServerConfig.TunnelHost))
+                        throw new InvalidOperationException("Missing host info in config");
 
-                if (string.IsNullOrEmpty(remoteServerConfig.TunnelHost))
-                    remoteServerConfig.TunnelHost = remoteServerConfig.ConnectHost;
-                if (string.IsNullOrEmpty(remoteServerConfig.ConnectHost))
-                    remoteServerConfig.ConnectHost = remoteServerConfig.TunnelHost;
+                    if (string.IsNullOrEmpty(remoteServerConfig.TunnelHost))
+                        remoteServerConfig.TunnelHost = remoteServerConfig.ConnectHost;
+                    if (string.IsNullOrEmpty(remoteServerConfig.ConnectHost))
+                        remoteServerConfig.ConnectHost = remoteServerConfig.TunnelHost;
+                }
             }
 
             Config = config;

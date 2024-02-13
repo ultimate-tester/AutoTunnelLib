@@ -64,7 +64,7 @@ namespace Force.AutoTunnel
 			while (!_isExiting)
 			{
 				var oldHandle = _handle;
-				if (!WinDivert.WinDivertRecv(_handle, packet, packet.Length, ref addr, ref packetLen))
+				if (WinDivert.WinDivertRecv(_handle, packet, packet.Length, ref addr, ref packetLen) == 0)
 				{
 					// showing error only if handle is not removed and not changed
 					if (_handle != IntPtr.Zero && oldHandle == _handle)

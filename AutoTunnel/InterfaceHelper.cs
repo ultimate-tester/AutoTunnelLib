@@ -10,10 +10,14 @@ namespace Force.AutoTunnel
 			NetworkInterface[] allNetworkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
 			foreach (NetworkInterface interface2 in allNetworkInterfaces)
 			{
-				if ((((interface2.OperationalStatus == OperationalStatus.Up) && (interface2.Speed > 0L)) && (interface2.NetworkInterfaceType != NetworkInterfaceType.Loopback)) && (interface2.NetworkInterfaceType != NetworkInterfaceType.Tunnel))
+				if ((((interface2.OperationalStatus == OperationalStatus.Up) &&
+					(interface2.Speed > 0L)) && 
+					(interface2.NetworkInterfaceType != NetworkInterfaceType.Loopback)) && 
+					(interface2.NetworkInterfaceType != NetworkInterfaceType.Tunnel))
 				{
-					var prop = interface2.GetType().GetField("index", BindingFlags.Instance | BindingFlags.NonPublic);
-					return (uint)prop.GetValue(interface2);
+					var props = interface2.GetIPProperties().GetIPv4Properties();
+
+					return (uint)props.Index;
 					// Console.WriteLine(interface2.Id + " " + interface2.Name + " " + prop.GetValue(interface2));
 				}
 			}

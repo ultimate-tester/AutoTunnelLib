@@ -100,8 +100,8 @@ namespace Force.AutoTunnel
 			public uint DstAddr;
 		}
 
-		[DllImport("WinDivert.dll")]
-		public static extern bool WinDivertHelperParsePacket(
+		[DllImport("WinDivert.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int WinDivertHelperParsePacket(
 			byte[] pPacket,
 			int packetLen,
 			ref WinDivertIpHeader ipHdr,
@@ -113,19 +113,19 @@ namespace Force.AutoTunnel
 			IntPtr ppdataHdr,
 			ref int dataLen);
 
-		[DllImport("WinDivert.dll")]
+		[DllImport("WinDivert.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern IntPtr WinDivertOpen(string filter, int layer, short priority, ulong flags);
 
-		[DllImport("WinDivert.dll")]
-		public static extern bool WinDivertClose(IntPtr handle);
+		[DllImport("WinDivert.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int WinDivertClose(IntPtr handle);
 
-		[DllImport("WinDivert.dll")]
-		public static extern bool WinDivertRecv(IntPtr handle, byte[] packet, int packetLen, ref WinDivertAddress addr, ref int readLen);
+		[DllImport("WinDivert.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int WinDivertRecv(IntPtr handle, byte[] packet, int packetLen, ref WinDivertAddress addr, ref int readLen);
 
-		[DllImport("WinDivert.dll")]
-		public static extern bool WinDivertSend(IntPtr handle, byte[] packet, int packetLen, ref WinDivertAddress addr, ref int writeLen);
+		[DllImport("WinDivert.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int WinDivertSend(IntPtr handle, byte[] packet, int packetLen, ref WinDivertAddress addr, ref int writeLen);
 
-		[DllImport("WinDivert.dll")]
-		public static extern bool WinDivertHelperCalcChecksums(byte[] packet, int packetLen, ref WinDivertAddress addr, ulong flags);
+		[DllImport("WinDivert.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int WinDivertHelperCalcChecksums(byte[] packet, int packetLen, ref WinDivertAddress addr, ulong flags);
 	}
 }
